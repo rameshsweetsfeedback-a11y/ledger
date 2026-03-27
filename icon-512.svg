@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#0f766e"/>
+  <rect x="64" y="64" width="384" height="384" rx="72" fill="#fffdf8"/>
+  <path d="M144 154h144c48 0 80 28 80 64 0 29-22 49-43 58 30 8 57 31 57 68 0 48-40 86-104 86H144V154zm75 54v47h59c20 0 31-8 31-23 0-16-11-24-31-24h-59zm0 99v61h76c24 0 38-11 38-30 0-22-16-31-43-31h-71z" fill="#c2410c"/>
+  <text x="256" y="470" font-family="Arial, sans-serif" font-size="46" text-anchor="middle" fill="#0f766e">RS Ledger</text>
+</svg>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Overview | Ledger RS</title>
+  <meta name="theme-color" content="#0f766e">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <section id="passwordGate" class="panel password-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="section-kicker">Security</p>
+          <h2>Enter Password</h2>
+        </div>
+      </div>
+      <p class="hero-copy">Enter the password to open Account Overview.</p>
+      <form id="passwordForm" class="form-grid">
+        <label>
+          Password
+          <input id="passwordInput" type="password" placeholder="Enter password" required>
+        </label>
+        <button id="verifyPasswordBtn" type="submit" class="primary-btn">Open Overview</button>
+      </form>
+      <p id="passwordMessage" class="password-message"></p>
+    </section>
+
+    <div id="overviewContent" hidden>
+    <nav class="topbar">
+      <div class="nav-actions">
+        <a class="nav-btn" href="index.html">
+          <span class="nav-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span>Back Home</span>
+        </a>
+        <a class="nav-btn" href="#create-ledger">Add Vendor / Employee</a>
+        <a id="exportCsvBtn" class="nav-btn" href="#" download="ledger-export.csv">Export CSV</a>
+      </div>
+      <div class="brand-block">
+        <span class="brand-mark">LR</span>
+        <div>
+          <p class="brand-label">Ramesh Sweets</p>
+          <strong>Account Overview</strong>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Overview</p>
+        <h1>All Vendor and Employee Accounts</h1>
+        <p class="hero-copy">Review every account separately, including opening balance, current balance, and full transaction history.</p>
+      </div>
+      <div class="hero-card">
+        <div>
+          <span class="metric-label">Vendor Accounts</span>
+          <strong id="overviewVendorCount">0</strong>
+        </div>
+        <div>
+          <span class="metric-label">Employee Accounts</span>
+          <strong id="overviewEmployeeCount">0</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="overview-grid">
+      <section id="create-ledger" class="panel panel-wide">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">Create Ledger</p>
+            <h2>Add Vendor or Employee</h2>
+          </div>
+        </div>
+        <form id="ledgerForm" class="form-grid">
+          <label>
+            Ledger Type
+            <select id="ledgerType" required>
+              <option value="vendor">Vendor</option>
+              <option value="employee">Employee</option>
+            </select>
+          </label>
+          <label>
+            Name
+            <input id="ledgerName" type="text" placeholder="Enter name" required>
+          </label>
+          <label>
+            Opening Balance
+            <input id="openingBalance" type="number" step="0.01" value="0">
+          </label>
+          <label>
+            Note
+            <input id="ledgerNote" type="text" placeholder="Optional description">
+          </label>
+          <button type="submit" class="primary-btn">Create Ledger</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">Vendor</p>
+            <h2>Vendor Accounts</h2>
+          </div>
+          <div class="group-total">
+            <span>Total Amount To Give</span>
+            <strong id="vendorGroupTotal">₹0.00</strong>
+          </div>
+        </div>
+        <div class="filter-row">
+          <label>
+            Search Vendor
+            <input id="vendorSearch" type="text" placeholder="Search by name or note">
+          </label>
+        </div>
+        <div id="vendorAccounts" class="account-list"></div>
+        <div class="pagination-row">
+          <button id="vendorPrevPage" type="button" class="secondary-btn">Previous</button>
+          <span id="vendorPageInfo" class="page-info">Page 1 of 1</span>
+          <button id="vendorNextPage" type="button" class="secondary-btn">Next</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">Employee</p>
+            <h2>Employee Accounts</h2>
+          </div>
+          <div class="group-total">
+            <span>Total Amount To Give</span>
+            <strong id="employeeGroupTotal">₹0.00</strong>
+          </div>
+        </div>
+        <div class="filter-row">
+          <label>
+            Search Employee
+            <input id="employeeSearch" type="text" placeholder="Search by name or note">
+          </label>
+        </div>
+        <div id="employeeAccounts" class="account-list"></div>
+        <div class="pagination-row">
+          <button id="employeePrevPage" type="button" class="secondary-btn">Previous</button>
+          <span id="employeePageInfo" class="page-info">Page 1 of 1</span>
+          <button id="employeeNextPage" type="button" class="secondary-btn">Next</button>
+        </div>
+      </section>
+    </main>
+
+    <section id="accountDetailPanel" class="panel detail-panel" hidden>
+      <div class="panel-heading">
+        <div>
+          <p id="detailType" class="section-kicker">Account Detail</p>
+          <h2 id="detailTitle">Select an account</h2>
+        </div>
+        <button id="closeDetailPanel" type="button" class="secondary-btn">Close</button>
+      </div>
+      <p id="detailNote" class="hero-copy"></p>
+      <div class="account-metrics">
+        <div class="metric-chip">
+          <span>Opening Balance</span>
+          <strong id="detailOpeningBalance"></strong>
+        </div>
+        <div class="metric-chip">
+          <span>Current Balance</span>
+          <strong id="detailCurrentBalance"></strong>
+        </div>
+        <div class="metric-chip">
+          <span>Total Debits</span>
+          <strong id="detailTotalDebits"></strong>
+        </div>
+        <div class="metric-chip">
+          <span>Total Credits</span>
+          <strong id="detailTotalCredits"></strong>
+        </div>
+        <div class="metric-chip">
+          <span>Total Entries</span>
+          <strong id="detailTotalEntries"></strong>
+        </div>
+      </div>
+      <div class="entries-table-wrap">
+        <table class="entries-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Running Balance</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="detailEntryRows"></tbody>
+        </table>
+      </div>
+    </section>
+    </div>
+  </div>
+
+  <template id="accountCardTemplate">
+    <article class="account-card">
+      <button type="button" class="account-card-button">
+        <div class="account-card-head">
+          <div>
+            <h3 class="account-title"></h3>
+            <p class="account-note"></p>
+          </div>
+          <div class="account-summary">
+            <span>Total Balance</span>
+            <strong class="account-balance"></strong>
+          </div>
+        </div>
+      </button>
+      <div class="account-card-head">
+        <button type="button" class="secondary-btn pdf-btn">Convert to PDF</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="api.js"></script>
+  <script src="account-overview.js"></script>
+  <script src="pwa.js"></script>
+</body>
+</html>

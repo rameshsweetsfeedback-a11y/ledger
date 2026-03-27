@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="36" fill="#0f766e"/>
+  <rect x="24" y="24" width="144" height="144" rx="28" fill="#fffdf8"/>
+  <path d="M54 58h54c18 0 30 10 30 24 0 11-8 18-16 21 11 3 21 11 21 25 0 18-15 31-39 31H54V58zm28 20v18h22c7 0 12-3 12-9s-4-9-12-9H82zm0 38v23h28c9 0 14-4 14-11 0-8-6-12-16-12H82z" fill="#c2410c"/>
+  <text x="96" y="178" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#0f766e">RS</text>
+</svg>

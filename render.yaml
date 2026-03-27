@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: ramesh-sweets-ledger
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python ledger_api.py
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
+      - key: DATA_DIR
+        value: /opt/render/project/data
+    disk:
+      name: ledger-data
+      mountPath: /opt/render/project/data
+      sizeGB: 1

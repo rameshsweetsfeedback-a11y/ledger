@@ -1,0 +1,16 @@
+services:
+  ledger-app:
+    build: .
+    container_name: rs-ledger-app
+    ports:
+      - "8000:8000"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8000
+      DATA_DIR: /data
+    volumes:
+      - ledger_data:/data
+    restart: unless-stopped
+
+volumes:
+  ledger_data:
